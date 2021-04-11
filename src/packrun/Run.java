@@ -19,10 +19,10 @@ import lejos.robotics.mapping.LineMap;
 public class Run{
 	
 	
-	private static EV3ColorSensor sl = new EV3ColorSensor(SensorPort.S1);
-	private static EV3ColorSensor sr = new EV3ColorSensor(SensorPort.S2);
-	private static EV3ColorSensor sh = new EV3ColorSensor(SensorPort.S3);
-	public static EV3GyroSensor g = new EV3GyroSensor(SensorPort.S4);
+	private static EV3ColorSensor sl = new EV3ColorSensor(SensorPort.S2);
+	private static EV3ColorSensor sr = new EV3ColorSensor(SensorPort.S1);
+	private static EV3ColorSensor sv = new EV3ColorSensor(SensorPort.S3); //Sensor nach vorne
+	private static EV3ColorSensor ss = new EV3ColorSensor(SensorPort.S4); //Sensor zur Seite
 
 	private static float pauselen = 0.5f;
 	
@@ -51,19 +51,6 @@ public class Run{
 		linemap = new LineMap(line, rec);
 
 		TomTom.Init();
-		
-		//TomTom.TimeTest();
-		
-		//UnregulatedDriving.StraightDriveDistance(1000);
-		//Warten für ButtonPress in TomTom.StartToSandsack()
-
-		TomTom.StartToSansack(); //Zu ersten Sandsäcken fahren
-		
-		WeirdSandsackShit.Aufnehmen(TomTom.getChassis());
-		
-		TomTom.SandSackAblegen();
-		
-		WeirdSandsackShit.Ablegen(TomTom.getChassis());
 		
 		getPower();
 	}
@@ -102,8 +89,11 @@ public class Run{
 		if(s=="l") {
 			return sl;
 		}
-		if(s=="s" || s=="h") {
-			return sh;
+		if(s=="v") {
+			return sv;
+		}
+		if(s=="s") {
+			return ss;
 		}
 		return null;
 	}
