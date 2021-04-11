@@ -11,7 +11,6 @@ import lejos.hardware.Power;
 import lejos.hardware.ev3.LocalEV3;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
-import lejos.hardware.sensor.EV3GyroSensor;
 import lejos.robotics.geometry.Line;
 import lejos.robotics.geometry.Rectangle;
 import lejos.robotics.mapping.LineMap;
@@ -29,6 +28,10 @@ public class Run{
 	private static LineMap linemap;
 	
 	public static void main(String[] args) throws Throwable {	//throws Throwable
+		
+		
+
+		/*******************************Map Stuff Beginnt*************************************/
 		
 		Line[] line = new Line[14];
 
@@ -66,11 +69,17 @@ public class Run{
 		Rectangle rec = new Rectangle(0,0,2362,1143);
 		linemap = new LineMap(line, rec);
 
+		/*******************************Map Stuff Vorbei*************************************/
+		
+		/********************************Fahrt Beginnt***************************************/
+		
 		
 		
 		TomTom.Init();
 		
 		getPower();
+	
+		/********************************Fahrt Vorbei***************************************/
 	}
 	
 	public static LineMap getMap() {

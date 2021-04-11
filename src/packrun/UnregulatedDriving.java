@@ -1,10 +1,40 @@
 package packrun;
 
+import lejos.hardware.motor.Motor;
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
 
 public class UnregulatedDriving {
+	
+	
 
+	public static float[] COLOUR_VALUES = { 0.102f, 0.160f, 0.312f, 0.507f, 0.582f }; // Ich kenne den Zweck auch nicht, aber der dritte Wert wird für den PID Regler benutzt
+
+	
+	public static void drive(float l, float r) {
+		// B-> to left C-> to right
+
+		Motor.B.setSpeed(Math.abs(l));
+		Motor.C.setSpeed(Math.abs(r));
+		if (l > 0) {
+			Motor.B.backward();
+		} else if (l < 0) {
+			Motor.B.forward();
+		} else {
+			Motor.B.stop(true);
+		}
+
+		if (r > 0) {
+			Motor.C.forward();
+		} else if (r < 0) {
+			Motor.C.backward();
+		} else {
+			Motor.C.stop(true);
+		}
+}
+	
+	
+	
 	public static void StraightDrive(int deg) {
 		TomTom.Uninit();
 		@SuppressWarnings("resource")

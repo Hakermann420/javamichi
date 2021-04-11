@@ -1,9 +1,6 @@
 
 package packrun;
 
-import java.io.FileWriter;
-import java.io.IOException;
-
 import lejos.hardware.motor.UnregulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.sensor.EV3ColorSensor;

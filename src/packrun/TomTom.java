@@ -1,7 +1,6 @@
 
 package packrun;
 
-import lejos.hardware.Button;
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
@@ -10,10 +9,7 @@ import lejos.robotics.chassis.Wheel;
 import lejos.robotics.chassis.WheeledChassis;
 import lejos.robotics.mapping.LineMap;
 import lejos.robotics.navigation.MovePilot;
-import lejos.robotics.navigation.Navigator;
-import lejos.robotics.navigation.Pose;
 import lejos.robotics.navigation.Waypoint;
-import lejos.robotics.pathfinding.Path;
 import lejos.robotics.pathfinding.ShortestPathFinder;
 
 public class TomTom{
@@ -27,24 +23,24 @@ public class TomTom{
 	
 	private static Navi n;//, new CompassPoseProvider(mp, new GyroDirectionFinder(new GyroscopeAdapter(g, 30))));;
 	
-	private static EV3ColorSensor sr = Run.getSensor("r");
-	private static EV3ColorSensor sl = Run.getSensor("l");
-	private static EV3ColorSensor sh = Run.getSensor("s");
+	
+	
+
+	
+	/****************************Waypoint Stuff Beginnt**********************************/
+	
 	
 	private static LineMap map;
 	public static ShortestPathFinder spf;
 	
-
-	public static Waypoint wp1 = new Waypoint(1822,572); 		// red/yellow-line
-	public static Waypoint wp2 = new Waypoint(528,285);  		// cornerlines
-	public static Waypoint wp3 = new Waypoint(1181,903); 		// another position
-	public static Waypoint wpR5 = new Waypoint(805,572); 		// position R5
-	public static Waypoint wpGCLZ1 = new Waypoint(432,845); 	// weird place we need to go to
-	public static Waypoint gh = new Waypoint(525,426);			//Position of Green House
-	public static Waypoint bh = new Waypoint(000,000);			//Position of Blue House
+	public static Waypoint start = new Waypoint(35,133);			// Startposition
 	
-	public static Waypoint tet = new Waypoint (432,845);
-	public static Waypoint tet2 = new Waypoint (2362-432,1143-845);
+	public static Waypoint tet = new Waypoint (432,845);			// ich weis nicht wozu die waren, aber ich habe sie aus dem alten projekt übernommen
+	public static Waypoint tet2 = new Waypoint (2362-432,1143-845);	// ich weis nicht wozu die waren, aber ich habe sie aus dem alten projekt übernommen
+	
+
+	
+	/****************************Waypoint Stuff Vorbei**********************************/
 	
 
 	public static void TimeTest() throws Throwable{
