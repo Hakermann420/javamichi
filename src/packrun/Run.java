@@ -30,26 +30,44 @@ public class Run{
 	
 	public static void main(String[] args) throws Throwable {	//throws Throwable
 		
-		Line[] line = new Line[12];
-		line[0] = new Line(710,0,710,520);
-		line[1] = new Line(910,0,910,520);
-		line[2] = new Line(710,520,910,520);
+		Line[] line = new Line[14];
+
+		//Gelbe Energie Nr 1
+		line[0] = new Line(271,9,683,337);
+		line[1] = new Line(271,337,683,9);
 		
-		line[3] = new Line(1452,0,1452,520);
-		line[4] = new Line(1652,0,1652,520);
-		line[5] = new Line(1452,520,1652,520);
+		//Gelbe Energie Nr 2
+		line[2] = new Line(937,9,1347,337);
+		line[3] = new Line(937,337,1347,9);
 		
-		line[6] = new Line(710,623,710,1143);
-		line[7] = new Line(910,623,910,1143);
-		line[8] = new Line(710,623,910,623);
+		//Gelbe Zusatzenergie
+		line[4] = new Line(282,312,660,690);
+		line[5] = new Line(282,690,660,312);
+				
 		
-		line[9] = new Line(1452,623,1452,1143);
-		line[10] = new Line(1652,623,1652,1143);
-		line[11] = new Line(1452,623,1652,623);
+		//Grüne Energie
+		line[6] = new Line(626,756,1286,1115);
+		line[7] = new Line(626,1115,1286,756);
+
+		//Grüne Zusatzenergie
+		line[8] = new Line(1045,402,1482,779);
+		line[9] = new Line(1045,779,1482,402);
+		
+		
+		//Blaue Energie
+		line[10] = new Line(2069,172,2436,671);
+		line[11] = new Line(2069,671,2436,172);
+
+		//Blaue Zusatzenergie
+		line[12] = new Line(1679,190,2056,567);
+		line[13] = new Line(1679,567,2056,190);
+				
 		
 		Rectangle rec = new Rectangle(0,0,2362,1143);
 		linemap = new LineMap(line, rec);
 
+		
+		
 		TomTom.Init();
 		
 		getPower();
