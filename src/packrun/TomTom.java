@@ -10,7 +10,9 @@ import lejos.robotics.chassis.WheeledChassis;
 import lejos.robotics.mapping.LineMap;
 import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.navigation.Waypoint;
+import lejos.robotics.pathfinding.Path;
 import lejos.robotics.pathfinding.ShortestPathFinder;
+import lejos.hardware.Button;
 
 public class TomTom{
 
@@ -30,10 +32,10 @@ public class TomTom{
 	/****************************Waypoint Stuff Beginnt**********************************/
 	
 	
-	private static LineMap map;
+	private static LineMap map = Run.getMap(0);
 	public static ShortestPathFinder spf;
 	
-	public static Waypoint start = new Waypoint(35,133);			// Startposition
+	public static Waypoint start = new Waypoint(35,133,90);			// Startposition
 	
 	public static Waypoint wGelbLaden = new Waypoint(135,500);		// Einladeanfahrt für gelbe Zusatzenergie
 	public static Waypoint gelbLaden0 = new Waypoint(484,330);		// Linker bzw erster Anfahrtspunkt für normale Energie
@@ -116,6 +118,24 @@ public class TomTom{
 		c.stop();
 		*/
 	}
+	
+	public static void StartToAdditiveYellow() throws Throwable{
+		n.getPoseProvider().setPose(start.getPose());
+
+		Path p = spf.findRoute(n.getPoseProvider().getPose(), wGelbLaden);
+		Run.Wait();
+
+		System.out.println("Betriebsbereit!");
+		Button.waitForAnyPress();
+
+		n.followPath(p, false);
+		while(!n.pathCompleted()){
+			continue;
+		}
+
+		n.rotateTo(0);
+	}
+	
 	
 	/**
 	 * Dreht den Roboter 10 Mal, um die Achsenlänge kalibrieren zu können
