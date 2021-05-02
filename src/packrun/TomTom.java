@@ -109,7 +109,7 @@ public class TomTom{
 		
 		b.resetTachoCount();
 		b.forward();
-		c.forward();
+		c.forward();	
 		
 		while(b.getTachoCount()<(88.6*2*Math.PI)/(62.4*2)*90) {
 			
@@ -132,7 +132,7 @@ public class TomTom{
 		while(!n.pathCompleted()){
 			continue;
 		}
-
+		
 		n.rotateTo(0);
 	}
 	
