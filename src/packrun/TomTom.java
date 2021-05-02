@@ -35,6 +35,16 @@ public class TomTom{
 	
 	public static Waypoint start = new Waypoint(35,133);			// Startposition
 	
+	public static Waypoint wGelbLaden = new Waypoint(135,500);		// Einladeanfahrt für gelbe Zusatzenergie
+	public static Waypoint gelbLaden0 = new Waypoint(484,330);		// Linker bzw erster Anfahrtspunkt für normale Energie
+	public static Waypoint gelbLaden1 = new Waypoint(1135,330);		// Rechter bzw zweiter Anfahrtspunkt für normale Energie
+
+	public static Waypoint kHaus0 = new Waypoint(350,750);			// Kreuzung von "hauptlinie" zum ersten Haus
+	public static Waypoint haus0 = new Waypoint(350,975);			// Abladepunkt des ersten Hauses
+
+
+
+
 	public static Waypoint tet = new Waypoint (432,845);			// ich weis nicht wozu die waren, aber ich habe sie aus dem alten projekt übernommen
 	public static Waypoint tet2 = new Waypoint (2362-432,1143-845);	// ich weis nicht wozu die waren, aber ich habe sie aus dem alten projekt übernommen
 	
