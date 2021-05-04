@@ -17,6 +17,7 @@ import lejos.robotics.mapping.LineMap;
 
 public class Run{
 	
+	private static boolean calibrate = true;		// calibrates robot instead of running main
 	
 	private static EV3ColorSensor sl = new EV3ColorSensor(SensorPort.S2);
 	private static EV3ColorSensor sr = new EV3ColorSensor(SensorPort.S1);
@@ -126,10 +127,16 @@ public class Run{
 		/*******************************Map Stuff Vorbei*************************************/
 		
 		/********************************Fahrt Beginnt***************************************/
-		
-		
-		
 		TomTom.Init();
+		
+		if(calibrate) {
+			
+			TomTom.Calibrate();
+			return;
+		}
+		
+		
+		TomTom.StartToAdditiveYellow();
 		
 		getPower();
 	

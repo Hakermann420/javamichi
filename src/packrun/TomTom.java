@@ -33,7 +33,7 @@ public class TomTom{
 	
 	
 	private static LineMap map = Run.getMap(0);
-	public static ShortestPathFinder spf;
+	public static ShortestPathFinder spf = new ShortestPathFinder(map);
 	
 	public static Waypoint start = new Waypoint(35,133,90);			// Startposition
 	
@@ -141,6 +141,8 @@ public class TomTom{
 	 * Dreht den Roboter 10 Mal, um die Achsenlänge kalibrieren zu können
 	 */
 	public static void Calibrate() {
+		mp.travel(1000);
+		Button.waitForAnyPress();
 		mp.rotate(3600);
 	}
 	
