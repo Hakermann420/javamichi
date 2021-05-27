@@ -16,8 +16,10 @@ import lejos.robotics.geometry.Rectangle;
 import lejos.robotics.mapping.LineMap;
 
 public class Run{
-	
-	private static boolean calibrate = true;		// calibrates robot instead of running main
+
+	public static int wetter = 0;
+	public static final int DEFAULT_SPEED = 500;
+	private static boolean calibrate = false;		// calibrates robot instead of running main
 	
 	private static EV3ColorSensor sl = new EV3ColorSensor(SensorPort.S2);
 	private static EV3ColorSensor sr = new EV3ColorSensor(SensorPort.S1);
@@ -33,8 +35,8 @@ public class Run{
 	
 	public static void main(String[] args) throws Throwable {	//throws Throwable
 		
-		
 
+		
 		/*******************************Map Stuff Beginnt*************************************/
 		
 		Line[] lineall = new Line[14];
@@ -135,8 +137,9 @@ public class Run{
 			return;
 		}
 		
-		
-		TomTom.StartToAdditiveYellow();
+		if(wetter == 0) {
+			TomTom.StartToAdditiveYellow();
+		}
 		
 		getPower();
 	

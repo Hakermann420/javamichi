@@ -37,7 +37,7 @@ public class TomTom{
 	
 	public static Waypoint start = new Waypoint(35,133,90);			// Startposition
 	
-	public static Waypoint wGelbLaden = new Waypoint(135,500);		// Einladeanfahrt für gelbe Zusatzenergie
+	public static Waypoint wGelbLaden = new Waypoint(105,540);		// Einladeanfahrt für gelbe Zusatzenergie
 	public static Waypoint gelbLaden0 = new Waypoint(484,330);		// Linker bzw erster Anfahrtspunkt für normale Energie
 	public static Waypoint gelbLaden1 = new Waypoint(1135,330);		// Rechter bzw zweiter Anfahrtspunkt für normale Energie
 
@@ -141,9 +141,12 @@ public class TomTom{
 	 * Dreht den Roboter 10 Mal, um die Achsenlänge kalibrieren zu können
 	 */
 	public static void Calibrate() {
+		Button.waitForAnyPress();
 		mp.travel(1000);
+		mp.stop();
 		Button.waitForAnyPress();
 		mp.rotate(3600);
+		mp.stop();
 	}
 	
 	/**
@@ -159,7 +162,6 @@ public class TomTom{
 	 * Initialisiert alle Motoren, Navigatoren, MovePilots, um sie wieder benutzen zu können
 	 */
 	public static void Init() {
-		
 		try{
 			b = new EV3MediumRegulatedMotor(MotorPort.B);
 		}catch(Exception e) {
@@ -171,11 +173,14 @@ public class TomTom{
 			e.printStackTrace();
 		}
 		
-		wheel1 = WheeledChassis.modelWheel(b, -62.4).offset(-88.6);;
-		wheel2 = WheeledChassis.modelWheel(c, 62.4).offset(88.6);;
+		wheel1 = WheeledChassis.modelWheel(b, -63.5).offset(-123.5);;
+		wheel2 = WheeledChassis.modelWheel(c, 63.5).offset(123.5);;
 		chassis = new WheeledChassis(new Wheel[] { wheel1, wheel2 }, WheeledChassis.TYPE_DIFFERENTIAL);;
 		mp = new MovePilot(chassis);;
 		n = new Navi(mp);;
+		
+		mp.setLinearSpeed(Run.DEFAULT_SPEED);
+		mp.setAngularSpeed(Run.DEFAULT_SPEED);
 		
 	}
 	
