@@ -37,7 +37,7 @@ public class TomTom{
 	
 	public static Waypoint start = new Waypoint(35,133,90);			// Startposition
 	
-	public static Waypoint wGelbLaden = new Waypoint(105,540);		// Einladeanfahrt für gelbe Zusatzenergie
+	public static Waypoint wGelbLaden = new Waypoint(105,550);		// Einladeanfahrt für gelbe Zusatzenergie
 	public static Waypoint gelbLaden0 = new Waypoint(484,330);		// Linker bzw erster Anfahrtspunkt für normale Energie
 	public static Waypoint gelbLaden1 = new Waypoint(1135,330);		// Rechter bzw zweiter Anfahrtspunkt für normale Energie
 
