@@ -137,6 +137,10 @@ public class TomTom{
 		n.rotateTo(0);
 	}
 	
+	public static void ZusatzenergieAufnehmen(float distance) {
+		
+	}
+	
 	/**
 	 * Drives Robot backwards/forwards against wall
 	 * @param duration The duration in milliseconds for how long to drive against wall

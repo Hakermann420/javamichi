@@ -131,6 +131,7 @@ public class Run{
 		/********************************Fahrt Beginnt***************************************/
 		TomTom.Init();
 		
+		
 		if(calibrate) {
 			
 			TomTom.Calibrate();
@@ -143,7 +144,7 @@ public class Run{
 		}
 		
 		getPower();
-	
+
 		/********************************Fahrt Vorbei***************************************/
 	}
 	
