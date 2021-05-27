@@ -2,6 +2,7 @@
 package packrun;
 
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
+import lejos.hardware.motor.Motor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.chassis.Chassis;
@@ -134,6 +135,22 @@ public class TomTom{
 		}
 		
 		n.rotateTo(0);
+	}
+	
+	/**
+	 * Drives Robot backwards/forwards against wall
+	 * @param duration The duration in milliseconds for how long to drive against wall
+	 * @param speed Speed in robot values for how fast to drive against wall
+	 */
+	public static void DriveAgainstWall(float duration, float speed) {
+		Uninit();
+		long start = System.currentTimeMillis();
+		UnregulatedDriving.drive(speed, speed);
+		while(System.currentTimeMillis() - start < duration);
+		
+		Motor.B.stop(true);
+		Motor.C.stop(true);
+		Init();
 	}
 	
 	

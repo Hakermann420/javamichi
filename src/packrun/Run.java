@@ -139,6 +139,7 @@ public class Run{
 		
 		if(wetter == 0) {
 			TomTom.StartToAdditiveYellow();
+			TomTom.DriveAgainstWall(1000, -700);
 		}
 		
 		getPower();
