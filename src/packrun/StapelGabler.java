@@ -12,7 +12,19 @@ import lejos.hardware.port.MotorPort;
  *
  */
 public class StapelGabler {
-	public static EV3LargeRegulatedMotor motor = new EV3LargeRegulatedMotor(MotorPort.D);
+	public static EV3LargeRegulatedMotor motor;
+	
+	
+	/**
+	 * Initializes the motor
+	 */
+	public static void Init() {
+		if(motor == null) motor = new EV3LargeRegulatedMotor(MotorPort.D);
+	}
+	
+	public static void Uninit() {
+		if(motor == null) motor.close();
+	}
 	
 	/**
 	 * Bewegt den Gabelstapler nach oben

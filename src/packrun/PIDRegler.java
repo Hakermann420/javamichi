@@ -34,8 +34,8 @@ class PIDRegler {
 		
 			leftSpeed = BASE_SPEED + P * err + I * integral + D * deriv; 
 			rightSpeed = BASE_SPEED - (P * err + I * integral + D * deriv);
-		
-			UnregulatedDriving.drive(leftSpeed, rightSpeed);
+			
+			UnregulatedDriving.drive((int)leftSpeed, (int)rightSpeed);
 			if(Motor.C.getTachoCount() >= degree) return;
 			if(Button.ESCAPE.isDown()) return;
 		}

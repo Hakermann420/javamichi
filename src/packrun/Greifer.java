@@ -13,7 +13,14 @@ import lejos.hardware.port.MotorPort;
 
 public class Greifer {
 	
-	public static EV3LargeRegulatedMotor motor = new EV3LargeRegulatedMotor(MotorPort.A);
+	public static EV3LargeRegulatedMotor motor;
+	
+	/**
+	 * Initializes the motor
+	 */
+	public static void Init() {
+		if(motor == null) motor = new EV3LargeRegulatedMotor(MotorPort.A);
+	}
 	
 	/**
 	 * Bewegt den Gabelstapler nach oben

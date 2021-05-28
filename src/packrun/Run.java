@@ -17,7 +17,7 @@ import lejos.robotics.mapping.LineMap;
 
 public class Run{
 
-	public static int wetter = 0;
+	public static int wetter = 1;
 	public static final int DEFAULT_SPEED = 500;
 	private static boolean calibrate = false;		// calibrates robot instead of running main
 	
@@ -140,7 +140,12 @@ public class Run{
 		
 		if(wetter == 0) {
 			TomTom.StartToAdditiveYellow();
-			TomTom.DriveAgainstWall(1000, -700);
+			//TomTom.DriveAgainstWall(1500, -70);
+			TomTom.ZusatzenergieAufnehmen(320);
+		}
+		else {
+			TomTom.StartToYellow();
+			TomTom.ZusatzenergieAufnehmen(320);
 		}
 		
 		getPower();
@@ -159,11 +164,11 @@ public class Run{
 	 */
 	public static LineMap getMap(int avoidNr) {
 		switch(avoidNr) {
-			case 1:
+			case 0:
 				return mapAvoidGelb;
-			case 2:
+			case 1:
 				return mapAvoidGrün;
-			case 3:
+			case 2:
 				return mapAvoidBlau;
 			default:
 				return mapAvoidAll;

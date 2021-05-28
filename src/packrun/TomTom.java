@@ -2,9 +2,7 @@
 package packrun;
 
 import lejos.hardware.motor.EV3MediumRegulatedMotor;
-import lejos.hardware.motor.Motor;
 import lejos.hardware.port.MotorPort;
-import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.chassis.Chassis;
 import lejos.robotics.chassis.Wheel;
 import lejos.robotics.chassis.WheeledChassis;
@@ -33,17 +31,17 @@ public class TomTom{
 	/****************************Waypoint Stuff Beginnt**********************************/
 	
 	
-	private static LineMap map = Run.getMap(0);
+	private static LineMap map = Run.getMap(Run.wetter);
 	public static ShortestPathFinder spf = new ShortestPathFinder(map);
 	
-	public static Waypoint start = new Waypoint(35,133,90);			// Startposition
+	public static Waypoint start = new Waypoint(35,133,90);					// Startposition
 	
-	public static Waypoint wGelbLaden = new Waypoint(105,550);		// Einladeanfahrt für gelbe Zusatzenergie
-	public static Waypoint gelbLaden0 = new Waypoint(484,330);		// Linker bzw erster Anfahrtspunkt für normale Energie
-	public static Waypoint gelbLaden1 = new Waypoint(1135,330);		// Rechter bzw zweiter Anfahrtspunkt für normale Energie
+	public static Waypoint wZusatzGelbLaden = new Waypoint(105, 550);		// Einladeanfahrt für gelbe Zusatzenergie
+	public static Waypoint wGelbLaden0 = new Waypoint(484, 420);			// Linker bzw erster Anfahrtspunkt für normale Energie
+	public static Waypoint wGelbLaden1 = new Waypoint(1135, 420);			// Rechter bzw zweiter Anfahrtspunkt für normale Energie
 
-	public static Waypoint kHaus0 = new Waypoint(350,750);			// Kreuzung von "hauptlinie" zum ersten Haus
-	public static Waypoint haus0 = new Waypoint(350,975);			// Abladepunkt des ersten Hauses
+	public static Waypoint kHaus0 = new Waypoint(350, 750);					// Kreuzung von "hauptlinie" zum ersten Haus
+	public static Waypoint haus0 = new Waypoint(350, 975);					// Abladepunkt des ersten Hauses
 
 
 
@@ -123,7 +121,7 @@ public class TomTom{
 	public static void StartToAdditiveYellow() throws Throwable{
 		n.getPoseProvider().setPose(start.getPose());
 
-		Path p = spf.findRoute(n.getPoseProvider().getPose(), wGelbLaden);
+		Path p = spf.findRoute(n.getPoseProvider().getPose(), wZusatzGelbLaden);
 		Run.Wait();
 
 		System.out.println("Betriebsbereit!");
@@ -137,8 +135,31 @@ public class TomTom{
 		n.rotateTo(0);
 	}
 	
-	public static void ZusatzenergieAufnehmen(float distance) {
+	public static void StartToYellow() throws Throwable{
+		n.getPoseProvider().setPose(start.getPose());
+
+		Path p = spf.findRoute(n.getPoseProvider().getPose(), wGelbLaden0);
+		Run.Wait();
+
+		System.out.println("Betriebsbereit!");
+		Button.waitForAnyPress();
+
+		n.followPath(p, false);
+		while(!n.pathCompleted()){
+			continue;
+		}
 		
+		n.rotateTo(180);
+	}
+	
+	public static void ZusatzenergieAufnehmen(int distance) {
+		StapelGabler.Up();
+		Greifer.Up();
+		
+		//mp.travel(distance);
+		UnregulatedDriving.Init();
+		UnregulatedDriving.StraightDrive(distance);
+		Greifer.Down();
 	}
 	
 	/**
@@ -146,14 +167,16 @@ public class TomTom{
 	 * @param duration The duration in milliseconds for how long to drive against wall
 	 * @param speed Speed in robot values for how fast to drive against wall
 	 */
-	public static void DriveAgainstWall(float duration, float speed) {
-		Uninit();
+	public static void DriveAgainstWall(float duration, int speed) {
+		
+		UnregulatedDriving.Init();
+		
 		long start = System.currentTimeMillis();
 		UnregulatedDriving.drive(speed, speed);
 		while(System.currentTimeMillis() - start < duration);
 		
-		Motor.B.stop(true);
-		Motor.C.stop(true);
+		UnregulatedDriving.drive(0,0);
+		
 		Init();
 	}
 	
@@ -177,12 +200,17 @@ public class TomTom{
 		
 		b.close();
 		c.close();
+		
+		StapelGabler.Uninit();
 	}
 	
 	/**
 	 * Initialisiert alle Motoren, Navigatoren, MovePilots, um sie wieder benutzen zu können
 	 */
 	public static void Init() {
+		
+		UnregulatedDriving.Uninit();
+		
 		try{
 			b = new EV3MediumRegulatedMotor(MotorPort.B);
 		}catch(Exception e) {
@@ -203,6 +231,8 @@ public class TomTom{
 		mp.setLinearSpeed(Run.DEFAULT_SPEED);
 		mp.setAngularSpeed(Run.DEFAULT_SPEED);
 		
+		StapelGabler.Init();
+		Greifer.Init();
 	}
 	
 	public static Chassis getChassis() {
