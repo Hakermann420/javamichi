@@ -144,12 +144,20 @@ public class TomTom{
 		System.out.println("Betriebsbereit!");
 		Button.waitForAnyPress();
 
-		n.followPath(p, false);
+		mp.travel(350);
+		mp.rotate(-90);
+		//n.rotateTo(0);
+		mp.travel(300);
+		mp.rotate(-90);
+		//n.rotateTo(-90);
+		
+		
+		/*n.followPath(p, false);
 		while(!n.pathCompleted()){
 			continue;
-		}
+		}*/
 		
-		n.rotateTo(180);
+		//n.rotateTo(270);
 	}
 	
 	public static void ZusatzenergieAufnehmen(int distance) {
@@ -189,7 +197,7 @@ public class TomTom{
 		mp.travel(1000);
 		mp.stop();
 		Button.waitForAnyPress();
-		mp.rotate(3600);
+		mp.rotate(-3600);
 		mp.stop();
 	}
 	
@@ -222,8 +230,8 @@ public class TomTom{
 			e.printStackTrace();
 		}
 		
-		wheel1 = WheeledChassis.modelWheel(b, -63.5).offset(-123.5);;
-		wheel2 = WheeledChassis.modelWheel(c, 63.5).offset(123.5);;
+		wheel1 = WheeledChassis.modelWheel(b, -63.5).offset(-112.5f);;
+		wheel2 = WheeledChassis.modelWheel(c, 63.5).offset(112.5f);;
 		chassis = new WheeledChassis(new Wheel[] { wheel1, wheel2 }, WheeledChassis.TYPE_DIFFERENTIAL);;
 		mp = new MovePilot(chassis);;
 		n = new Navi(mp);;

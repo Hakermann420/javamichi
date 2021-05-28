@@ -19,14 +19,14 @@ public class Run{
 
 	public static int wetter = 1;
 	public static final int DEFAULT_SPEED = 500;
-	private static boolean calibrate = false;		// calibrates robot instead of running main
+	private static boolean calibrate = false;								// calibrates robot instead of running main
 	
 	private static EV3ColorSensor sl = new EV3ColorSensor(SensorPort.S2);
 	private static EV3ColorSensor sr = new EV3ColorSensor(SensorPort.S1);
-	private static EV3ColorSensor sv = new EV3ColorSensor(SensorPort.S3); //Sensor nach vorne
-	private static EV3ColorSensor ss = new EV3ColorSensor(SensorPort.S4); //Sensor zur Seite
+	private static EV3ColorSensor sv = new EV3ColorSensor(SensorPort.S3);	//Sensor nach vorne
+	private static EV3ColorSensor ss = new EV3ColorSensor(SensorPort.S4);	//Sensor zur Seite
 
-	private static float pauselen = 0.5f;
+	private static float pauselen = 1.5f;
 	
 	private static LineMap mapAvoidAll;
 	private static LineMap mapAvoidGelb;
@@ -145,7 +145,7 @@ public class Run{
 		}
 		else {
 			TomTom.StartToYellow();
-			TomTom.ZusatzenergieAufnehmen(320);
+			TomTom.ZusatzenergieAufnehmen(350);
 		}
 		
 		getPower();

@@ -26,13 +26,13 @@ public class Greifer {
 	 * Bewegt den Gabelstapler nach oben
 	 */
 	public static void Up() {
-		motor.rotate(-40);
+		motor.rotate(-45);
 	}
 	
 	/**
 	 * Bewegt den Gabelstapler nach unten
 	 */
 	public static void Down() {
-		motor.rotate(40);
+		motor.rotate(45);
 	}
 }
