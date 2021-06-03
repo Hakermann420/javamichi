@@ -147,7 +147,7 @@ public class TomTom{
 		mp.travel(350);
 		mp.rotate(-90);
 		//n.rotateTo(0);
-		mp.travel(300);
+		mp.travel(280);
 		mp.rotate(-90);
 		//n.rotateTo(-90);
 		
@@ -168,6 +168,9 @@ public class TomTom{
 		UnregulatedDriving.Init();
 		UnregulatedDriving.StraightDrive(distance);
 		Greifer.Down();
+		
+
+		UnregulatedDriving.StraightDrive(-distance);
 	}
 	
 	/**
@@ -230,8 +233,8 @@ public class TomTom{
 			e.printStackTrace();
 		}
 		
-		wheel1 = WheeledChassis.modelWheel(b, -63.5).offset(-112.5f);;
-		wheel2 = WheeledChassis.modelWheel(c, 63.5).offset(112.5f);;
+		wheel1 = WheeledChassis.modelWheel(b, -63.5).offset(-125.5f);;
+		wheel2 = WheeledChassis.modelWheel(c, 63.5).offset(125.5f);;
 		chassis = new WheeledChassis(new Wheel[] { wheel1, wheel2 }, WheeledChassis.TYPE_DIFFERENTIAL);;
 		mp = new MovePilot(chassis);;
 		n = new Navi(mp);;
