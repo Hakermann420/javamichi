@@ -14,6 +14,7 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.geometry.Line;
 import lejos.robotics.geometry.Rectangle;
 import lejos.robotics.mapping.LineMap;
+import lejos.robotics.navigation.Pose;
 
 public class Run{
 
@@ -137,16 +138,21 @@ public class Run{
 			TomTom.Calibrate();
 			return;
 		}
-		
+
 		if(wetter == 0) {
 			TomTom.StartToAdditiveYellow();
-			//TomTom.DriveAgainstWall(1500, -70);
+			
 			TomTom.ZusatzenergieAufnehmen(330);
+			
+			TomTom.setPose(new Pose(140,490,0));
 		}
 		else {
 			TomTom.StartToYellow();
 			TomTom.ZusatzenergieAufnehmen(350);
+			TomTom.setPose(new Pose(480,450,-90));
 		}
+
+		TomTom.YellowToHouse0();
 		
 		getPower();
 

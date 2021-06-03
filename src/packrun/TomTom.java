@@ -8,6 +8,7 @@ import lejos.robotics.chassis.Wheel;
 import lejos.robotics.chassis.WheeledChassis;
 import lejos.robotics.mapping.LineMap;
 import lejos.robotics.navigation.MovePilot;
+import lejos.robotics.navigation.Pose;
 import lejos.robotics.navigation.Waypoint;
 import lejos.robotics.pathfinding.Path;
 import lejos.robotics.pathfinding.ShortestPathFinder;
@@ -40,7 +41,7 @@ public class TomTom{
 	public static Waypoint wGelbLaden0 = new Waypoint(484, 420);			// Linker bzw erster Anfahrtspunkt für normale Energie
 	public static Waypoint wGelbLaden1 = new Waypoint(1135, 420);			// Rechter bzw zweiter Anfahrtspunkt für normale Energie
 
-	public static Waypoint kHaus0 = new Waypoint(350, 750);					// Kreuzung von "hauptlinie" zum ersten Haus
+	public static Waypoint kHaus0 = new Waypoint(210, 750);					// Kreuzung von "hauptlinie" zum ersten Haus (350,750)
 	public static Waypoint haus0 = new Waypoint(350, 975);					// Abladepunkt des ersten Hauses
 
 
@@ -67,55 +68,6 @@ public class TomTom{
 		chassis.rotate(180);
 		chassis.waitComplete();
 
-		/*Uninit();
-		UnregulatedMotor b = new UnregulatedMotor(MotorPort.B);
-		UnregulatedMotor c = new UnregulatedMotor(MotorPort.C);
-		
-		b.setPower(100);
-		c.setPower(100);
-		
-		c.resetTachoCount();
-		b.backward();
-		c.forward();
-		
-		while(c.getTachoCount()<(1500*Math.PI/62.4)*36) {
-			System.out.println((1500*Math.PI/62.4)*36);
-			System.out.println(c.getTachoCount());
-		}
-		b.stop();
-		c.stop();
-		
-		b.resetTachoCount();
-		b.forward();
-		c.forward();
-		
-		while(b.getTachoCount()<(88.6*2*Math.PI)/(62.4*2)*90) {
-			
-		}
-		b.stop();
-		c.stop();
-		
-		
-		c.resetTachoCount();
-		b.backward();
-		c.forward();
-		
-		while(c.getTachoCount()<(1500*Math.PI/62.4)*36) {
-			System.out.println(c.getTachoCount());
-		}
-		b.stop();
-		c.stop();
-		
-		b.resetTachoCount();
-		b.forward();
-		c.forward();	
-		
-		while(b.getTachoCount()<(88.6*2*Math.PI)/(62.4*2)*90) {
-			
-		}
-		b.stop();
-		c.stop();
-		*/
 	}
 	
 	public static void StartToAdditiveYellow() throws Throwable{
@@ -133,6 +85,19 @@ public class TomTom{
 		}
 		
 		n.rotateTo(0);
+	}
+	
+	public static void YellowToHouse0() throws Throwable{
+
+		Path p = spf.findRoute(n.getPoseProvider().getPose(), kHaus0);
+		Run.Wait();
+
+		n.followPath(p, false);
+		while(!n.pathCompleted()){
+			continue;
+		}
+		
+		n.rotateTo(90);
 	}
 	
 	public static void StartToYellow() throws Throwable{
@@ -170,8 +135,9 @@ public class TomTom{
 		Greifer.Down();
 		
 		Run.Wait();
-
-		UnregulatedDriving.StraightDrive(-distance);
+		Init();
+		
+		mp.travel(-0.5*distance);
 	}
 	
 	/**
@@ -234,8 +200,8 @@ public class TomTom{
 			e.printStackTrace();
 		}
 		
-		wheel1 = WheeledChassis.modelWheel(b, -63.5).offset(-123.5f);;
-		wheel2 = WheeledChassis.modelWheel(c, 63.5).offset(123.5f);;
+		wheel1 = WheeledChassis.modelWheel(b, -63.5).offset(-133.5f);;
+		wheel2 = WheeledChassis.modelWheel(c, 63.5).offset(133.5f);;
 		chassis = new WheeledChassis(new Wheel[] { wheel1, wheel2 }, WheeledChassis.TYPE_DIFFERENTIAL);;
 		mp = new MovePilot(chassis);;
 		n = new Navi(mp);;
@@ -245,6 +211,14 @@ public class TomTom{
 		
 		StapelGabler.Init();
 		Greifer.Init();
+	}
+	
+	public static Pose getPose() {
+		return n.getPoseProvider().getPose();
+	}
+	
+	public static void setPose(Pose p) {
+		n.getPoseProvider().setPose(p);
 	}
 	
 	public static Chassis getChassis() {
