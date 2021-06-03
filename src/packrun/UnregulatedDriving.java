@@ -73,9 +73,17 @@ public class UnregulatedDriving {
 		
 		b.setPower(100);
 		c.setPower(100);
-		
+
 		b.backward();
 		c.forward();
+		
+		if(deg < 0) {
+			deg = -deg;
+
+			b.forward();
+			c.backward();
+		}
+		
 		
 		while(true) {
 			if(b.isMoving() && c.isMoving()) {

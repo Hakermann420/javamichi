@@ -138,7 +138,7 @@ public class TomTom{
 	public static void StartToYellow() throws Throwable{
 		n.getPoseProvider().setPose(start.getPose());
 
-		Path p = spf.findRoute(n.getPoseProvider().getPose(), wGelbLaden0);
+		//Path p = spf.findRoute(n.getPoseProvider().getPose(), wGelbLaden0);
 		Run.Wait();
 
 		System.out.println("Betriebsbereit!");
@@ -169,6 +169,7 @@ public class TomTom{
 		UnregulatedDriving.StraightDrive(distance);
 		Greifer.Down();
 		
+		Run.Wait();
 
 		UnregulatedDriving.StraightDrive(-distance);
 	}
@@ -233,8 +234,8 @@ public class TomTom{
 			e.printStackTrace();
 		}
 		
-		wheel1 = WheeledChassis.modelWheel(b, -63.5).offset(-125.5f);;
-		wheel2 = WheeledChassis.modelWheel(c, 63.5).offset(125.5f);;
+		wheel1 = WheeledChassis.modelWheel(b, -63.5).offset(-123.5f);;
+		wheel2 = WheeledChassis.modelWheel(c, 63.5).offset(123.5f);;
 		chassis = new WheeledChassis(new Wheel[] { wheel1, wheel2 }, WheeledChassis.TYPE_DIFFERENTIAL);;
 		mp = new MovePilot(chassis);;
 		n = new Navi(mp);;

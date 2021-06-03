@@ -189,8 +189,13 @@ public class Run{
 	 * Wartet die länge der in Run deklarierten Variable (float) in Sekunden
 	 * @throws InterruptedException
 	 */
-	public static void Wait() throws InterruptedException {
-		TimeUnit.MILLISECONDS.sleep((long)(pauselen * 1000));
+	public static void Wait() {
+		try {
+			TimeUnit.MILLISECONDS.sleep((long)(pauselen * 1000));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
